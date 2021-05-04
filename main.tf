@@ -12,20 +12,15 @@ variable "do_token" {}
 provider "digitalocean" {
   token = var.do_token
 }
+
+data "digitalocean_image" "ubuntu" {
+  private = "ubuntu-nginx"
+}
 resource "digitalocean_droplet" "web" {
   name   = "terraform-demo-do"
   size   = "s-1vcpu-1gb"
-  image  = "ubuntu-18-04-x64"
+  image  = data.digitalocean_image.ubuntu.id
   region = "sgp1"
-  
-  provisioner "remote-exec" {
-    inline = [
-      "export PATH=$PATH:/usr/bin",
-      # install nginx
-      "sudo apt-get update",
-      "sudo apt-get -y install nginx"
-    ]
-  }
 }
 
 resource "digitalocean_firewall" "web" {
