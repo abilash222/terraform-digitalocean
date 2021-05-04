@@ -14,7 +14,8 @@ provider "digitalocean" {
 }
 
 data "digitalocean_image" "ubuntu" {
-  private = "ubuntu-nginx"
+  name = "ubuntu-nginx"
+  private = "true"
 }
 resource "digitalocean_droplet" "web" {
   name   = "terraform-demo-do"
