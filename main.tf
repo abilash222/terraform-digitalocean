@@ -12,10 +12,15 @@ variable "do_token" {}
 provider "digitalocean" {
   token = var.do_token
 }
+
+data "digitalocean_image" "ubuntu" {
+  name = "ubuntu-nginx"
+  source = "all"
+}
 resource "digitalocean_droplet" "web" {
   name   = "terraform-demo-do"
   size   = "s-1vcpu-1gb"
-  image  = "ubuntu-nginx"
+  image  = data.digitalocean_image.ubuntu.id
   region = "sgp1"
 }
 
