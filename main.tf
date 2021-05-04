@@ -15,8 +15,17 @@ provider "digitalocean" {
 resource "digitalocean_droplet" "web" {
   name   = "terraform-demo-do"
   size   = "s-1vcpu-1gb"
-  image  = "ubuntu-nginx"
+  image  = "ubuntu-18-04-x64"
   region = "sgp1"
+  
+  provisioner "remote-exec" {
+    inline = [
+      "export PATH=$PATH:/usr/bin",
+      # install nginx
+      "sudo apt-get update",
+      "sudo apt-get -y install nginx"
+    ]
+  }
 }
 
 resource "digitalocean_firewall" "web" {
