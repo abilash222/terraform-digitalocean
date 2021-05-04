@@ -15,7 +15,7 @@ provider "digitalocean" {
 resource "digitalocean_droplet" "web" {
   name   = "terraform-demo-do"
   size   = "s-1vcpu-1gb"
-  image  = "ubuntu-18-04-x64"
+  image  = "ubuntu-nginx"
   region = "nyc3"
 }
 
