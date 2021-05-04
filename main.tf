@@ -16,7 +16,7 @@ resource "digitalocean_droplet" "web" {
   name   = "terraform-demo-do"
   size   = "s-1vcpu-1gb"
   image  = "ubuntu-nginx"
-  region = "nyc3"
+  region = "sgp1"
 }
 
 resource "digitalocean_firewall" "web" {
